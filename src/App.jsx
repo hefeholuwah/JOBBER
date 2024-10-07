@@ -11,6 +11,10 @@ import NotFoundPage from './pages/NotFoundPage';
 import JobPage, { jobLoader } from './pages/JobPage';
 import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
+import SignupButton from './components/SignupButton';
+import UserTypeSelection from './components/UserTypeSelection';
+import HirerSignupForm from './components/HirerSignup';
+import DeveloperSignupForm from './components/DeveloperSignup';
 
 const App = () => {
   // Add New Job
@@ -48,6 +52,8 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>
+
+
         <Route index element={<HomePage />} />
         <Route path='/jobs' element={<JobsPage />} />
         <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob} />} />
@@ -61,6 +67,10 @@ const App = () => {
           element={<JobPage deleteJob={deleteJob} />}
           loader={jobLoader}
         />
+        <Route path='/select-user-type' element={<UserTypeSelection />} />
+        <Route path='/signup/:userType' element={<SignupButton />} />
+        <Route path="/signup/hirer" element={<HirerSignupForm />} />
+        <Route path="/signup/developer" element={<DeveloperSignupForm />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )
@@ -68,4 +78,6 @@ const App = () => {
 
   return <RouterProvider router={router} />;
 };
+  
+
 export default App;
