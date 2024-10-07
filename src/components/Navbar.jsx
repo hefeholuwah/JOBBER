@@ -29,6 +29,9 @@ const Navbar = () => {
                 <NavLink to='/add-job' className={linkClass}>
                   Add Job
                 </NavLink>
+                <NavLink to='/select-user-type' className={linkClass}>
+                  Sign Up
+                </NavLink>
               </div>
             </div>
           </div>
@@ -37,4 +40,5 @@ const Navbar = () => {
     </nav>
   );
 };
+
 export default Navbar;

@@ -15,7 +15,7 @@ const UserTypeSelection = () => {
                 <div className="grid md:grid-cols-2 gap-8">
                     <Card
                         title="I am a client hiring for a project"
-                        onClick={() => handleCardClick('client')}
+                        onClick={() => handleCardClick('hirer')}
                     />
                     <Card
                         title="I am a developer looking for work"
@@ -38,7 +38,3 @@ const Card = ({ title, onClick }) => (
 );
 
 export default UserTypeSelection;
-
-
-
-
