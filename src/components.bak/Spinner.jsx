@@ -6,9 +6,7 @@ const override = {
   margin: "100px auto",
 };
 
-const Spinner = ({ loading = false }) => {
-  if (!loading) return null; 
-
+const Spinner = ({ loading }) => {
   return (
     <ClipLoader
       color="#4338ca"
@@ -19,9 +17,9 @@ const Spinner = ({ loading = false }) => {
   );
 };
 
-
+// Add prop validation for loading
 Spinner.propTypes = {
-  loading: PropTypes.bool // loading is expected to be a boolean and is required
+  loading: PropTypes.bool.isRequired, // loading is expected to be a boolean and is required
 };
 
 export default Spinner;
