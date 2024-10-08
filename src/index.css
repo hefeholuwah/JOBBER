@@ -6,3 +6,24 @@
 .section {
     height: 100dvh;
 }
+
+.bg-b {
+    background-color: rgba(0, 0, 0,0.85);
+}
+
+.filter {
+    filter: invert(100%);
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.blink {
+    animation: blink 1s steps(2) 0s infinite normal none;
+}
+
+@keyframes blink {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
