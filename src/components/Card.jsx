@@ -1,4 +1,4 @@
-const Card = ({ children, bg = 'bg-gray-100' }) => {
-  return <div className={`${bg} p-6 rounded-lg shadow-md`}>{children}</div>;
+const Card = ({ children, bg = 'bg-white', style='' }) => {
+  return <div className={`${bg} p-5 rounded-lg border border-gray-400 ${style}`}>{children}</div>;
 };
 export default Card;

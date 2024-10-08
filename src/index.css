@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Landing page sections */
+.section {
+    height: 100dvh;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.bg-b {
+    background-color: rgba(0, 0, 0,0.85);
+}
+
+.bg-bl {
+    background-color: #7DD3FC;
+}
+
+.bg-bl:hover {
+    background-color: #4bc6ff;
+}
+
+.text-bl {
+    color: #7DD3FC;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.filter {
+    filter: invert(100%);
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.blink {
+    animation: blink 1s steps(2) 0s infinite normal none;
+}
+
+@keyframes blink {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

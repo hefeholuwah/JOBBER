@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { updatePageTitle } from '../utils'
 
 const UserTypeSelection = () => {
+    updatePageTitle("Join our platform");
     const navigate = useNavigate();
 
     const handleCardClick = (userType) => {
