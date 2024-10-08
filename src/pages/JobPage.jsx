@@ -1,26 +1,60 @@
-import { useParams, useLoaderData, useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import { FaArrowLeft, FaMapMarker } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
-const JobPage = ({ deleteJob }) => {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const job = useLoaderData();
+const JobPage = () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const [job, setJob] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const onDeleteClick = (jobId) => {
+  useEffect(() => {
+    const fetchJob = async () => {
+      try {
+        const res = await fetch(`/api/jobs/${id}`)
+        if (!res.ok) {
+          throw new Error('Failed to fetch job')
+        }
+        const data = await res.json()
+        setJob(data)
+      } catch (error) {
+        setError(error.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchJob()
+  }, [id])
+
+  const deleteJob = async (jobId) => {
     const confirm = window.confirm(
       'Are you sure you want to delete this listing?'
-    );
+    )
 
-    if (!confirm) return;
+    if (!confirm) return
 
-    deleteJob(jobId);
+    try {
+      const res = await fetch(`/api/jobs/${jobId}`, {
+        method: 'DELETE',
+      })
 
-    toast.success('Job deleted successfully');
+      if (!res.ok) {
+        throw new Error('Failed to delete job')
+      }
 
-    navigate('/jobs');
-  };
+      toast.success('Job deleted successfully')
+      navigate('/jobs')
+    } catch (error) {
+      toast.error('Failed to delete job')
+    }
+  }
+
+  if (loading) return <div className="text-center py-10">Loading...</div>
+  if (error) return <div className="text-center py-10 text-red-500">{error}</div>
+  if (!job) return <div className="text-center py-10">Job not found</div>
 
   return (
     <>
@@ -37,7 +71,7 @@ const JobPage = ({ deleteJob }) => {
 
       <section className='bg-indigo-50'>
         <div className='container m-auto py-10 px-6'>
-          <div className='grid grid-cols-1 md:grid-cols-70/30 w-full gap-6'>
+          <div className='grid grid-cols-1 md:grid-cols-[70%_30%] w-full gap-6'>
             <main>
               <div className='bg-white p-6 rounded-lg shadow-md text-center md:text-left'>
                 <div className='text-gray-500 mb-4'>{job.type}</div>
@@ -63,7 +97,6 @@ const JobPage = ({ deleteJob }) => {
               </div>
             </main>
 
-            {/* <!-- Sidebar --> */}
             <aside>
               <div className='bg-white p-6 rounded-lg shadow-md'>
                 <h3 className='text-xl font-bold mb-6'>Company Info</h3>
@@ -83,7 +116,6 @@ const JobPage = ({ deleteJob }) => {
                 <h3 className='text-xl'>Contact Phone:</h3>
 
                 <p className='my-2 bg-indigo-100 p-2 font-bold'>
-                  {' '}
                   {job.company.contactPhone}
                 </p>
               </div>
@@ -97,7 +129,7 @@ const JobPage = ({ deleteJob }) => {
                   Edit Job
                 </Link>
                 <button
-                  onClick={() => onDeleteClick(job.id)}
+                  onClick={() => deleteJob(job.id)}
                   className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block'
                 >
                   Delete Job
@@ -108,13 +140,13 @@ const JobPage = ({ deleteJob }) => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-const jobLoader = async ({ params }) => {
-  const res = await fetch(`/api/jobs/${params.id}`);
-  const data = await res.json();
-  return data;
-};
+export const jobLoader = async ({ params }) => {
+  const res = await fetch(`/api/jobs/${params.id}`)
+  const data = await res.json()
+  return data
+}
 
-export { JobPage as default, jobLoader };
+export default JobPage
