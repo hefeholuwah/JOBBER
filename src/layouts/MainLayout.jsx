@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../components/Navbar';
 import { useLocation } from 'react-router-dom';
 
+
 const MainLayout = () => {
   const location = useLocation();
 
