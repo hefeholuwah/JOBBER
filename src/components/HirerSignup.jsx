@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import {
     createUserWithEmailAndPassword,
@@ -173,6 +173,15 @@ const HirerSignupForm = () => {
                         </button>
                     </div>
                 </form>
+
+                <div className="mt-6 text-center">
+                    <p className="mb-2">
+                        Not an employer? <Link to="signup/developer" className="text-[#2563EB] hover:underline">Sign up as a Developer</Link>
+                    </p>
+                    <p>
+                        Already have an account? <Link to="/login" className="text-[#2563EB] hover:underline">Log in</Link>
+                    </p>
+                </div>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import { useState } from "react";
 import {
@@ -183,6 +183,15 @@ const DeveloperSignupForm = () => {
                         </button>
                     </div>
                 </form>
+
+                <div className="mt-6 text-center">
+                    <p className="mb-2">
+                        Not a developer? <Link to="/signup/hirer" className="text-[#2563EB] hover:underline">Sign up as a Hirer</Link>
+                    </p>
+                    <p>
+                        Already have an account? <Link to="/login" className="text-[#2563EB] hover:underline">Log in</Link>
+                    </p>
+                </div>
             </div>
         </div>
     );
