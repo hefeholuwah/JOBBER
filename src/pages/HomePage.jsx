@@ -1,3 +1,4 @@
+// import navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import DevtypeCards from '../components/DevtypeCards';
 import JobListings from '../components/JobListings';
@@ -9,6 +10,7 @@ const HomePage = () => {
 
   return (
     <>
+    
       <Hero />
       <DevtypeCards />
       <JobListings isHome={true} />

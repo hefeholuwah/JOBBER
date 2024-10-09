@@ -15,6 +15,7 @@ import SignupButton from './components/SignupButton';
 import UserTypeSelection from './components/UserTypeSelection';
 import HirerSignupForm from './components/HirerSignup';
 import DeveloperSignupForm from './components/DeveloperSignup';
+import LoginPage from './pages/LoginPage';
 
 const App = () => {
   // Add New Job
@@ -71,6 +72,7 @@ const App = () => {
         <Route path='/signup/:userType' element={<SignupButton />} />
         <Route path="/signup/hirer" element={<HirerSignupForm />} />
         <Route path="/signup/developer" element={<DeveloperSignupForm />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )
