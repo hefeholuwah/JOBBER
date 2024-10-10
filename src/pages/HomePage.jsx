@@ -1,5 +1,5 @@
 import Hero from '../components/Hero';
-import DevtypeCards from '../components/DevtypeCards';
+import DevTypeCards from '../components/DevTypeCards';
 import JobListings from '../components/JobListings';
 import ViewAllJobs from '../components/ViewAllJobs';
 import { updatePageTitle } from '../utils';
@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-      <DevtypeCards />
+      <DevTypeCards />
       <JobListings isHome={true} />
       <ViewAllJobs />
     </>
