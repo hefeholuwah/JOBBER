@@ -1,4 +1,5 @@
 import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { useEffect, useState } from "react";
 
 const SuccessNotification = ({ message, onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
