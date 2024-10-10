@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase/firebase'
+import SuccessNotification from '../components/SuccessNotice'
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const [showNotification, setShowNotification] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -14,7 +16,10 @@ export default function LoginPage() {
         setError('')
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            navigate('/jobs') // Redirect to jobs page after successful login
+            setShowNotification(true)
+            setTimeout(() => {
+                navigate('/jobs')
+            }, 2000)
         } catch (error) {
             setError('Failed to log in. Please check your email and password.')
             console.error('Login error:', error)
@@ -81,6 +86,12 @@ export default function LoginPage() {
                     </p>
                 </div>
             </div>
+            {showNotification && (
+                <SuccessNotification
+                    message="You have successfully logged in!"
+                    onClose={() => setShowNotification(false)}
+                />
+            )}
         </div>
     )
 }
