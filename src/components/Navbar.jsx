@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 import SignupButton from './SignupButton';
+import LoginButton from './LoginButton';
 
 const Navbar = () => {
   const linkClass = ({ isActive }) =>
@@ -33,7 +34,13 @@ const Navbar = () => {
                 <NavLink to='/recruiters' className={linkClass}>
                   Recruiters
                 </NavLink>
+                {/* <NavLink to='/login' className={linkClass}>
+                Log In
+                </NavLink> */}
               </div>
+            </div>
+            <div className='flex items-center justify-between mr-6'>
+              <LoginButton />
             </div>
             <div className='flex items-center justify-between'>
               <SignupButton />
