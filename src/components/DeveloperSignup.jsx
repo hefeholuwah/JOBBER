@@ -82,102 +82,96 @@ const DeveloperSignupForm = () => {
     };
 
     return (
-        <div className="min-h-screen relative">
-            <div className="absolute top-4 left-4">
-                <img
-                    src={logo}
-                    alt="Logo"
-                    className="w-auto h-12 cursor-pointer"
-                    onClick={() => navigate("/")}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === 'Enter' && navigate('/')}
-                />
-            </div>
-            <div className="max-w-md mx-auto p-6 pt-20">
-                <form onSubmit={handleSubmit}>
-                    <h4 className="text-2xl font-bold mb-4">Join as a developer</h4>
-
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block mb-2">
-                            Name
-                        </label>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+                <div className="absolute top-4 left-4">
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        className="w-auto h-12 cursor-pointer"
+                        onClick={() => navigate("/")}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => e.key === 'Enter' && navigate('/')}
+                    />
+                </div>
+                <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold">Join as a developer</h2>
+                    <p className="text-gray-600">
+                        Create your account to find remote development jobs
+                    </p>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                         <input
                             type="text"
                             id="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
-                            className="w-full px-3 py-2 border rounded"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block mb-2">
-                            Email
-                        </label>
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-3 py-2 border rounded"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block mb-2">
-                            Password
-                        </label>
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                         <input
                             type="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="w-full px-3 py-2 border rounded"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="skills" className="block mb-2">
-                            Skills
-                        </label>
+                    <div>
+                        <label htmlFor="skills" className="block text-sm font-medium text-gray-700">Skills</label>
                         <textarea
                             id="skills"
                             value={skills}
                             onChange={(e) => setSkills(e.target.value)}
                             required
-                            className="w-full px-3 py-2 border rounded"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="portfolioUrl" className="block mb-2">
-                            Portfolio URL
-                        </label>
+                    <div>
+                        <label htmlFor="portfolioUrl" className="block text-sm font-medium text-gray-700">Portfolio URL</label>
                         <input
                             type="url"
                             id="portfolioUrl"
                             value={portfolioUrl}
                             onChange={(e) => setPortfolioUrl(e.target.value)}
                             required
-                            className="w-full px-3 py-2 border rounded"
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-4 mt-6">
+                    <div className="flex flex-wrap justify-center gap-4">
                         <button
                             type="submit"
-                            className="bg-[#2563EB] hover:bg-[#1e40af] text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 shadow-lg transform hover:scale-105"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Sign Up
                         </button>
                         <button
                             type="button"
                             onClick={handleGoogleSignUp}
-                            className="bg-[#2563EB] hover:bg-[#1e40af] text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 shadow-lg transform hover:scale-105"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Sign Up with Google
                         </button>
@@ -185,11 +179,11 @@ const DeveloperSignupForm = () => {
                 </form>
 
                 <div className="mt-6 text-center">
-                    <p className="mb-2">
-                        Not a developer? <Link to="/signup/hirer" className="text-[#2563EB] hover:underline">Sign up as a Hirer</Link>
+                    <p className="text-sm">
+                        Not a developer? <Link to="/signup/hirer" className="font-medium text-indigo-600 hover:text-indigo-500">Sign up as a Hirer</Link>
                     </p>
-                    <p>
-                        Already have an account? <Link to="/login" className="text-[#2563EB] hover:underline">Log in</Link>
+                    <p className="text-sm mt-2">
+                        Already have an account? <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">Log in</Link>
                     </p>
                 </div>
             </div>
