@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+    scroll-behavior: smooth;
+}
+
 /* Landing page sections */
 .section {
     height: 100dvh;
@@ -27,6 +31,10 @@
     color: #7DD3FC;
 }
 
+.text-bl-2 {
+    color: #4bc6ff;
+}
+
 .ml-2 {
     margin-left: 0.5rem;
 }
@@ -46,4 +54,18 @@
 @keyframes blink {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+.card {
+    width: 220px;
+    height: 100px;
+    background-color:#ddd;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border: 2px solid white;
+    box-shadow: 0 3px 5px #000000ae;
 }
