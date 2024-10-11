@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,16 +32,20 @@
     color: #7DD3FC;
 }
 
-.text-bl-2 {
-    color: #4bc6ff;
+.text-b {
+    color: #5e5e5e;
 }
 
 .ml-2 {
     margin-left: 0.5rem;
 }
 
-.filter {
+.filter-invert {
     filter: invert(100%);
+}
+
+.filter-sepia {
+    filter: sepia(100%);
 }
 
 .position-fixed {
@@ -59,13 +64,18 @@
 .card {
     width: 220px;
     height: 100px;
-    background-color:#ddd;
+    border: 1px solid #ddd;
     cursor: pointer;
     transition: transform 0.5s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    border: 2px solid white;
-    box-shadow: 0 3px 5px #000000ae;
+    transform: translateY(-5px);
+    /* background-color:#eeeeee7d; */
+    border: 1px solid #a9e4ff;
+    box-shadow: 0 3px 20px #00000044;
+}
+
+.font-serif {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

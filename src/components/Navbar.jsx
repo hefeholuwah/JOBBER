@@ -14,8 +14,8 @@ const Navbar = () => {
         <div className='flex h-20 items-center justify-between'>
           <div className='flex flex-1 items-center justify-center md:items-stretch md:justify-start'>
             <NavLink className='flex flex-shrink-0 items-center mr-4' to='/'>
-              <img className='filter h-10 w-auto' src={logo} alt='Remotely' />
-              <span className='hidden md:block text-white text-2xl ml-2'>
+              <img className='filter-invert h-10 w-auto' src={logo} alt='Remotely' />
+              <span className='hidden md:block text-gray-400 text-2xl ml-2'>
                 &lt;/&gt;
               </span>
             </NavLink>
