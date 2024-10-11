@@ -4,7 +4,15 @@ import getJobs from "./JobServices";
  */
 
 // Constant RealTimeJobs
-export let realTimeJobs: Object;
+export let realTimeJobs: Object | undefined = undefined;
+
+const setRealTimeJob = async () => {
+    try {
+        realTimeJobs = await getJobs();
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 let intervalId = setInterval(
     async () => {
@@ -16,5 +24,7 @@ let intervalId = setInterval(
                 clearInterval(intervalId);   // Stop sending request!
             }
         }
-    }, (1000 * 60) * 3  // Fetch jobs in interval of 5 mins
+    }, (1000 * 60) * 3  // Fetch jobs in interval of 3 mins
 );
+
+setRealTimeJob();  // So it displays jobs immediately page opens
