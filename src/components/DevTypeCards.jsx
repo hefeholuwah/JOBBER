@@ -18,17 +18,21 @@ const DevTypeCards = () => {
           {
           devTypes.map(
             ({ name, keyWords, imgBase64 }) => (
-              <Card
-                style='flex justify-between card'
+              <Link
+                to={`/jobs?dev_type=${name.toLowerCase()}`}
               >
-                <img src={imgBase64} alt={name} width='50px' />
-                <div
-                  className='ml-2 flex flex-col justify-center items-center p-1'
-                >
-                  <h1 className='text-xl'>{name}</h1>
-                  <small className='font-semibold'>{getDevJobsBykeyWords(keyWords).length} jobs available</small>
-                </div>
-              </Card>
+                <Card
+                  style='flex justify-between card'
+                  >
+                  <img src={imgBase64} alt={name} width='50px' />
+                  <div
+                    className='ml-2 flex flex-col justify-center items-center p-1'
+                    >
+                    <h1 className='text-xl font-serif'>{name}</h1>
+                    <small className='font-serif text-b'>{getDevJobsBykeyWords(keyWords).length} Jobs Available</small>
+                  </div>
+                </Card>
+              </Link>
             )
           )
           }
