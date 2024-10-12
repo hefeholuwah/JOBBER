@@ -1,15 +1,45 @@
 import { Link } from 'react-router-dom';
 import Card from './Card';
 import { devTypes } from '../utils';
-import { realTimeJobs } from '../services/RealTimeJobService';
+import getRealTimeJobs from '../services/RealTimeJobService';
+import { useEffect, useState } from 'react';
 
 
 const DevTypeCards = () => {
+  const [ jobs, setJobs ] = useState([]);
+
+  useEffect(
+    () => {
+      setJobs(getRealTimeJobs().jobs);
+    }, []
+  );
+
+  const getDevJobsBykeyWords = (keyWords) => {
+    return (
+      jobs.filter(
+  
+      ({ jobTitle }) => {
+  
+        let status = false;
+        const title = jobTitle.toLowerCase();
+  
+        console.log(jobTitle);
+  
+        keyWords.forEach(keyWord => {
+          if (!status && title.includes(keyWord)) {
+            status = true;
+          }
+        });
+  
+        return status;
+      })
+    );
+  }
 
   return (
-    <section className=' w-full flex flex-col items-center py-4 my-9'>
+    <section className='w-full flex flex-col items-center py-4 my-9 z-idx'>
       <h1
-        className='text-4xl font-bold my-8'
+        className='text-3xl font-bold my-8 text-center'
       >
         Browse by Tech Stack
       </h1>
@@ -23,9 +53,9 @@ const DevTypeCards = () => {
                 to={`/jobs?dev_type=${name.toLowerCase()}`}
               >
                 <Card
-                  style='flex justify-between card'
+                  style='flex justify-between card z-idx'
                   >
-                  <img src={imgBase64} alt={name} width='50px' />
+                  <img src={imgBase64} alt={name} width='50px' className='bg-bl-2 rounded-md' />
                   <div
                     className='ml-2 flex flex-col justify-center items-center p-1'
                     >
@@ -42,28 +72,5 @@ const DevTypeCards = () => {
     </section>
   );
 };
-
-const getDevJobsBykeyWords = (keyWords) => {
-  let jobs = realTimeJobs ? realTimeJobs.jobs : null;
-  return (
-    jobs ? jobs.filter(
-
-    ({ jobTitle }) => {
-
-      let status = false;
-      const title = jobTitle.toLowerCase();
-
-      console.log(jobTitle);
-
-      keyWords.forEach(keyWord => {
-        if (!status && title.includes(keyWord)) {
-          status = true;
-        }
-      });
-
-      return status;
-    }) : []
-  );
-}
 
 export default DevTypeCards;
