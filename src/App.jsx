@@ -1,5 +1,4 @@
 // src/App.js
-import React from 'react';
 import {
   Route,
   createBrowserRouter,
@@ -60,11 +59,14 @@ const App = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/jobs" element={<JobsPage />} />
-        <Route path="/add-job" element={
-          <ProtectedRoute>
-            <AddJobPage addJobSubmit={addJob} />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/add-job"
+          element={
+            <ProtectedRoute>
+              <AddJobPage addJobSubmit={addJob} />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/edit-job/:id"
           element={
@@ -85,11 +87,14 @@ const App = () => {
         <Route path="/signup/developer" element={<DeveloperSignupForm />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/companies" element={<Companies />} />
-        <Route path="/profile" element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
