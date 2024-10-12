@@ -34,7 +34,7 @@ const JobUpdate = () => {
       <pre className="inline text-bl p-2">
         <code>{jobs.length}</code><span className="blink">_</span>
       </pre>
-      <pre className="inline text-gray-400">
+      <pre className="inline text-gray-400 text-center">
         {totalInfo}
       </pre>
     </span>
@@ -55,7 +55,7 @@ const JobUpdate = () => {
         }
         </span>
       </pre>
-      <pre className="inline text-gray-400">
+      <pre className="inline text-gray-400 text-center">
         {todayInfo}
       </pre>
     </span>
