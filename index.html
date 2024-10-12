@@ -8,6 +8,18 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.5/libs/oversea/index.js"></script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+          config: {
+            bot_id: '7424964118086041606',
+          },
+          componentProps: {
+            title: 'Coze',
+          },
+        });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
