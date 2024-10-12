@@ -48,6 +48,9 @@ export const devTypes: devType[] = [
         name: "Mobile",
         keyWords: [
             "mobile",
+            "android",
+            "apple",
+            "ios",
         ],
         imgBase64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACKklEQVR4nO2ay0ocQRSGv3HhLsT1uBpIFskjiC51k5m8S4LEjLqLJC8g+BQ+QG4zISrIBJK9SXYGXIhiZjaCSUnB39A009UXq2ZU6oPaVJ36T5+uU6drugfK0wH6wAgwgdoI6AFtPPM24EWbnLbl6+I7ErwEXgHNzPiixk8qaJ5ozkKm32qvyZfxtRJ9iVnhPP7IxgZTxJJsjx02r2XzGQ8MJZa982ne1UgRm5Z5NGXz10cAiUMXswoiWQlXO9bF2zk39estgBCYGICIK1ATE1NIxBSqiYkpJGIK1cTEFBIxhYAZ4Cuwxx1NoefSOJqw30KhB8AA2MfNR2m8SPUdaK7VmEoADWBXY98d858C//XDaC7V/0Nzd6VV1m9l8oQ21X8GPHLM35Hddqa/BZxqbKOC38qME1oBroB/wDPH3Dm9KrEr8GTM+LJDJ1gAj4Fz9a0XzF2V3XuHzYZsLjJBBgvgW0Hupkvnb9naVzN5NFJ7aeDwW5us0KBkAEnp/KVgbk0ArYLNl/BpTOmkQjEwITexa/NlS+dDh/bKNDZx0eZzlU4qFAMzrQdZUem8NQ8ydAw41PvThJey/4AbO+dwmkeJPH6WKJ0h/HoTsoe0LwWl884dp+tgYgAirkBNTEwhEVOoJiam0H1JoWGJz6y+mU+ddG9MT2L24/Ok6Pr80N2W2KWCaAa+893UXw1cbzwqsVXiA7bv9sbXxSfYlbBLmuyJEM1qWx+l7/w1kA+b6ksdhXcAAAAASUVORK5CYII=",
     },
