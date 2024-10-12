@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Ensure you import useState and useEffect
+import { useState, useEffect } from "react"; // Ensure you import useState and useEffect
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import SignupButton from "./SignupButton";
