@@ -8,7 +8,7 @@ const Hero = () => {
           <h2 className="text-4xl font-semibold text-white my-4 sm:text-5xl md:text-6xl text-center">
             You've honed your skills, now
           </h2>
-          <h1 className='text-bl font-extrabold text-white sm:text-5xl md:text-6xl'>
+          <h1 className="text-bl font-extrabold text-white sm:text-5xl md:text-6xl">
             Find your Dream Job
           </h1>
           <br />

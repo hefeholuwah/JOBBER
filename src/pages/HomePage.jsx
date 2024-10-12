@@ -1,8 +1,7 @@
-import Hero from '../components/Hero';
-import DevTypeCards from '../components/DevTypeCards';
-import JobListings from '../components/JobListings';
-import ViewAllJobs from '../components/ViewAllJobs';
-import { updatePageTitle } from '../utils';
+// import navbar from '../components/Navbar';
+import Hero from "../components/Hero";
+import DevTypeCards from "../components/DevTypeCards";
+import { updatePageTitle } from "../utils";
 
 const HomePage = () => {
   updatePageTitle("REMOTELYDEV | Find your Dream Job");
@@ -11,8 +10,6 @@ const HomePage = () => {
     <>
       <Hero />
       <DevTypeCards />
-      <JobListings isHome={true} />
-      <ViewAllJobs />
     </>
   );
 };

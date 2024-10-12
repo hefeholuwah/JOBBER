@@ -1,6 +1,7 @@
 import getJobs from "./JobServices";
+
 /*
- * This Job Service provides real-time job data to components that needs it
+ * This Job Service provides real-time job data to components that need it
  */
 
 // Constant RealTimeJobs
