@@ -5,6 +5,8 @@ import { auth } from '../firebase/firebase';
 import { getDatabase, ref, set } from 'firebase/database';
 import { AlertCircle } from 'lucide-react';
 import SuccessNotification from './SuccessNotice';
+import { generateAvatarUrl } from '../utils';
+import { RxAvatar } from 'react-icons/rx';
 
 export default function HirerSignup() {
     const [name, setName] = useState('');
@@ -34,12 +36,19 @@ export default function HirerSignup() {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
+            // Update user profile with display name and photo URL
+            await updateProfile(user, {
+                displayName: name,
+                photoURL: generateAvatarUrl(name)
+            });
+
             const db = getDatabase();
             await set(ref(db, 'hirers/' + user.uid), {
                 name,
                 email,
                 company,
                 role,
+                avatarUrl: generateAvatarUrl(name)
             });
 
             setShowSuccessNotification(true);
@@ -61,6 +70,7 @@ export default function HirerSignup() {
                 email: user.email,
                 company: 'Not specified',
                 role: 'Not specified',
+                avatarUrl: generateAvatarUrl(user.displayName || 'Unknown')
             });
 
             setShowSuccessNotification(true);
