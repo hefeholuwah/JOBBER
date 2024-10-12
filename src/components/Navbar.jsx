@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"; // Ensure you import useState and useEffect
+
+import React, { useState, useEffect, useRef } from "react"; 
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import SignupButton from "./SignupButton";
@@ -19,12 +20,22 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [menuHidden, setMenuHidden] = useState(true);
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   function toggleMenuVisibility() {
     setMenuHidden((prev) => !prev);
   }
 
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+   
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
@@ -41,7 +52,10 @@ const Navbar = () => {
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      unsubscribe();
+    };
   }, []);
 
   const headLink = ({ isActive }) =>
@@ -59,7 +73,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      toggleDropdown();
+      setIsDropdownOpen(false);
     } catch (error) {
       console.error("Error signing out: ", error);
     }
@@ -136,11 +150,11 @@ const Navbar = () => {
                     )}
                   </button>
                   {isDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div ref={dropdownRef} className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <NavLink
                         to="/profile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={toggleDropdown}
+                        onClick={() => setIsDropdownOpen(false)}
                       >
                         Profile
                       </NavLink>
