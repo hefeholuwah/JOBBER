@@ -17,8 +17,9 @@ const DevTypeCards = () => {
         <div className='flex wrap justify-evenly items-align gap-6 p-4 rounded-lg'>
           {
           devTypes.map(
-            ({ name, keyWords, imgBase64 }) => (
+            ({ name, keyWords, imgBase64 }, index) => (
               <Link
+                key={index}
                 to={`/jobs?dev_type=${name.toLowerCase()}`}
               >
                 <Card

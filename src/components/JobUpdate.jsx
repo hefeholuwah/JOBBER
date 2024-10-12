@@ -1,8 +1,16 @@
-const JobUpdate = (
-    { jobs }
-) => {
-  let totalJobCount = jobs.length;
-  let todayJobCount = getTodayJobs(jobs).length;
+import { useEffect, useState } from "react";
+import getRealTimeJobs from "../services/RealTimeJobService";
+
+const JobUpdate = () => {
+  const [ jobs, setJobs ] = useState([]);
+  const [ todayJobs, setTodayJobs ] = useState([]);
+
+  useEffect(
+    () => {
+      setJobs(getRealTimeJobs().jobs);
+      setTodayJobs(getTodayJobs(jobs));
+    }, []
+  );
 
   function getTodayJobs(jobs) {
     const today = new Date();
@@ -13,58 +21,46 @@ const JobUpdate = (
       }
     )
   }
-  let totalInfo = totalJobCount != 1 ? "jobs are waiting for you" : "job is waiting for you";
-  let todayInfo = `${todayJobCount} new jobs open today`, blinker = '_';
 
-  if (todayJobCount === 0) {
-    todayInfo = "There are no jobs currently open today";
-    todayJobCount = ">";
-    blinker = '';
-  } else if (todayJobCount === 1) {
-    todayInfo = `${todayJobCount} new job open today`;
-  }
-  
-  if (jobs.length > 0)
-  {
-    return (
-      <>
-      <span
-        className='my-4 text-xl text-white block'
-      >
-        <pre className="inline text-bl p-2">
-          <code>{totalJobCount}</code><span className="blink">_</span>
-        </pre>
-        <pre className="inline text-gray-400">
-          {totalInfo}
-        </pre>
-      </span>
-      <span
-        className='my-4 text-xl text-white block'
-      >
-        <pre className="inline text-bl p-2">
-          <code>{todayJobCount}</code><span className="blink">{blinker}</span>
-        </pre>
-        <pre className="inline text-gray-400">
-          {todayInfo}
-        </pre>
-      </span>
-      </>
-    )
-  }
+  let totalInfo = jobs.length != 1 ? "jobs are waiting for you" : "job is waiting for you";
+  let todayInfo = todayJobs.length != 1 ? 'new jobs open today' : 'new job open today';
+  todayInfo = todayJobs.length < 1 ? "There are no jobs currently open today" : todayInfo;
 
-  else 
-  {
-    return (
-      <>
-      <pre className="text-gray-400">
-        { "> We will let you know as soon as a new job arrives" }
+  return (
+    <>
+    <span
+      className='my-4 text-xl text-white block'
+    >
+      <pre className="inline text-bl p-2">
+        <code>{jobs.length}</code><span className="blink">_</span>
       </pre>
-      {/* <p className=" border border-blue-500 bg-white">
-        It's likely you are having a bad internet connection
-      </p> */}
-      </>
-    )
-  }
+      <pre className="inline text-gray-400">
+        {totalInfo}
+      </pre>
+    </span>
+    <span
+      className='my-4 text-xl text-white block'
+    >
+      <pre className="inline text-bl p-2">
+        <code>{
+          todayJobs.length === 0
+          ? ''
+          : todayJobs.length
+        }
+        </code>
+        <span className="blink">{
+          todayJobs.length === 0
+          ? '>'
+          : '_'
+        }
+        </span>
+      </pre>
+      <pre className="inline text-gray-400">
+        {todayInfo}
+      </pre>
+    </span>
+    </>
+  )
 }
 
 export default JobUpdate;
