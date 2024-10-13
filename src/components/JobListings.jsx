@@ -4,7 +4,7 @@ import JobFilters from "./JobFilters";
 import Spinner from "./Spinner";
 import getJobs from "../services/JobServices";
 
-const JobListings = ({ isHome }) => {
+const JobListings = ({ isHome, userRole }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,12 +13,13 @@ const JobListings = ({ isHome }) => {
     jobLevel: "All",
     timePosted: "All",
   });
+  const [visibleJobsCount, setVisibleJobsCount] = useState(6); // Number of jobs to show initially
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const data = await getJobs();
-        setJobs(data.jobs || []); // Ensure jobs are correctly populated
+        setJobs(data.jobs || []); // Assuming data.jobs contains your job listings
       } catch (error) {
         console.error("Error fetching jobs:", error);
         setError(error);
@@ -26,20 +27,19 @@ const JobListings = ({ isHome }) => {
         setLoading(false);
       }
     };
+
     fetchJobs();
   }, []);
 
+  // Apply filters to jobs
   const filteredJobs = jobs.filter((job) => {
-    const matchesJobType =
-      filters.jobType === "All" || job.jobType.includes(filters.jobType);
-    const matchesJobLevel =
-      filters.jobLevel === "All" ||
-      job.jobLevel.toLowerCase() === filters.jobLevel.toLowerCase();
-    const matchesTimePosted =
-      filters.timePosted === "All" ||
-      isWithinTimeRange(job.pubDate, filters.timePosted);
-
-    return matchesJobType && matchesJobLevel && matchesTimePosted;
+    return (
+      job &&
+      (filters.jobType === "All" || job.jobType.includes(filters.jobType)) &&
+      (filters.jobLevel === "All" || job.jobLevel === filters.jobLevel) &&
+      (filters.timePosted === "All" ||
+        isWithinTimeRange(job.pubDate, filters.timePosted))
+    );
   });
 
   const handleFilterChange = (filterName, value) => {
@@ -47,6 +47,10 @@ const JobListings = ({ isHome }) => {
       ...prevFilters,
       [filterName]: value,
     }));
+  };
+
+  const handleViewMore = () => {
+    setVisibleJobsCount((prevCount) => prevCount + 6); // Increase the number of visible jobs
   };
 
   if (loading) return <Spinner />;
@@ -64,22 +68,44 @@ const JobListings = ({ isHome }) => {
           {isHome ? "Recent Jobs" : "Browse Jobs"}
         </h2>
 
-        {/* Pass filters and handler to JobFilters */}
+        {/* Add Job Button for Hirers Only */}
+        {userRole === "hirer" && (
+          <div className="text-center mb-4">
+            <Link to="/add-job">
+              <button className="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600">
+                Add Job
+              </button>
+            </Link>
+          </div>
+        )}
+
         <JobFilters filters={filters} onFilterChange={handleFilterChange} />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          {filteredJobs.map((job) => (
+          {filteredJobs.slice(0, visibleJobsCount).map((job) => (
             <JobListing key={job.id} job={job} />
           ))}
         </div>
+
+        {/* View More Jobs Button */}
+        {visibleJobsCount < filteredJobs.length && (
+          <div className="text-center mt-6">
+            <button
+              onClick={handleViewMore}
+              className="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600"
+            >
+              View More Jobs
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
 };
 
-function isWithinTimeRange(date, range) {
+function isWithinTimeRange(dateString, range) {
   const now = new Date();
-  const jobDate = new Date(date);
+  const jobDate = new Date(dateString);
   const diff = now.getTime() - jobDate.getTime();
   const days = diff / (1000 * 3600 * 24);
 
