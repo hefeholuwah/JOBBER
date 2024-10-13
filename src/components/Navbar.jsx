@@ -89,7 +89,7 @@ const Navbar = () => {
                 />
                 <span className="text-gray-400 text-2xl ml-2">&lt;/&gt;</span>
               </NavLink>
-              <div className="mx-auto">
+              <div className="mr-auto flex items-center">
                 <NavBarLinks
                   linkClass={headLink}
                   navbarClass="hidden lg:block flex space-x-2"
