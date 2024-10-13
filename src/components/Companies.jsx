@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import getJobs from "../services/JobServices";
+import LoadSpinner from "./LoadSpinner";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
+  const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     // Fetch job data and extract company info
     const fetchCompanies = async () => {
       try {
@@ -26,26 +29,33 @@ const Companies = () => {
         // Convert the map to an array of companies
         setCompanies(Array.from(companyMap.values()));
       } catch (error) {
+        setLoading(true);
         console.error("Error fetching companies:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCompanies();
   }, []);
 
+  if (loading) return <LoadSpinner />;
   return (
-    <section className="section w-full bg-black py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-white text-center mb-8">
-          Explore Top Companies
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {companies.map((company, index) => (
-            <CompanyCard key={index} company={company} />
-          ))}
+    <>
+      <title>{`REMOTELY | Explore Top Companies (${companies.length})`}</title>
+      <section className="section w-full bg-black py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+          <h1 className="text-4xl font-bold text-white text-center mb-8">
+            Explore Top Companies
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {companies.map((company, index) => (
+              <CompanyCard key={index} company={company} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

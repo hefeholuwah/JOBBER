@@ -4,12 +4,12 @@ import DevTypeCards from "../components/DevTypeCards";
 import { updatePageTitle } from "../utils";
 
 const HomePage = () => {
-  updatePageTitle("REMOTELYDEV | Find your Dream Job");
 
   return (
     <>
+      <title>REMOTELY | Find your Dream Job</title>
       <Hero />
-      <DevTypeCards />
+      {/* <DevTypeCards /> */}
     </>
   );
 };

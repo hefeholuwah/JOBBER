@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import JobListing from "./JobListing";
-import JobFilters from "./JobFilters";
-import Spinner from "./Spinner";
-import getJobs from "../services/JobServices";
+import { useState, useEffect } from 'react'
+import JobListing from './JobListing'
+import JobFilters from './JobFilters'
+import LoadSpinner from './LoadSpinner'
+import getJobs from '../services/JobServices'
 
 const JobListings = ({ isHome, userRole }) => {
   const [jobs, setJobs] = useState([]);
@@ -53,18 +53,13 @@ const JobListings = ({ isHome, userRole }) => {
     setVisibleJobsCount((prevCount) => prevCount + 6); // Increase the number of visible jobs
   };
 
-  if (loading) return <Spinner />;
-  if (error)
-    return (
-      <div className="text-center text-red-500">
-        Error loading jobs: {error.message}
-      </div>
-    );
+  if (loading) return <LoadSpinner />
+  if (error) return <div className="h-full w-full mt-8 text-center text-red-500">Error loading jobs: {error.message}</div>
 
   return (
-    <section className="bg-blue-50 px-4 py-10">
-      <div className="container-xl lg:container m-auto">
-        <h2 className="text-3xl font-bold text-indigo-500 mb-6 text-center">
+    <section className='px-4 py-10 flex flex-col items-center'>
+      <div className="container-xl lg:container mt-16">
+        <h2 className="text-4xl font-bold text-black mb-6 text-center">
           {isHome ? "Recent Jobs" : "Browse Jobs"}
         </h2>
 
@@ -81,7 +76,7 @@ const JobListings = ({ isHome, userRole }) => {
 
         <JobFilters filters={filters} onFilterChange={handleFilterChange} />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6 mx-2">
           {filteredJobs.slice(0, visibleJobsCount).map((job) => (
             <JobListing key={job.id} job={job} />
           ))}
