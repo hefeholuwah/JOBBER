@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, update } from 'firebase/database';
 import { AlertCircle } from 'lucide-react';
 import SuccessNotification from './SuccessNotice';
-
+import { generateAvatarUrl } from '../utils';
 
 export default function DeveloperSignup() {
     const [name, setName] = useState('');
@@ -34,13 +34,18 @@ export default function DeveloperSignup() {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-
+            // update user profile with name and avatar
+            await updateProfile(user, {
+                displayName: name,
+                photoURL: generateAvatarUrl(name),
+            })
             const db = getDatabase();
             await set(ref(db, 'developers/' + user.uid), {
                 name,
                 email,
                 skills,
                 portfolioUrl,
+                avatarUrl: generateAvatarUrl(name),
             });
             setShowNotification(true);
             setTimeout(() => {
@@ -63,6 +68,7 @@ export default function DeveloperSignup() {
                 email: user.email,
                 skills: 'Not specified',
                 portfolioUrl: '',
+                avatarUrl: generateAvatarUrl(user.displayName || 'Unknown'),
             });
 
             setShowNotification(true);
@@ -143,7 +149,7 @@ export default function DeveloperSignup() {
                     </div>
                     <button
                         type="submit"
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#5EBAE7] hover:bg-[#3AA9E0] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5EBAE7]"
                     >
                         Sign Up
                     </button>

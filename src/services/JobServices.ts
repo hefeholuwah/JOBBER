@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/jobs";
+const API_URL = "https://jobberbackend.onrender.com/jobs";
 
 const getJobs = async () => {
   try {
