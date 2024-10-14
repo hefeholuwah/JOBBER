@@ -9,13 +9,17 @@ const JobListing = ({ job }) => {
 
   const shortenText = (text) => {
     /* Convert all unicode chars to their textual representation */
-    return unescape(text).replaceAll(/&#[\dAFaf]{4};/g,'').slice(0, 100) + '...';
-  }
+    return (
+      unescape(text)
+        .replaceAll(/&#[\dAFaf]{4};/g, "")
+        .slice(0, 100) + "..."
+    );
+  };
 
   const numberWithComma = (numStr) => {
     /* Convert number to their commar-formatted pattern */
     return parseInt(numStr).toLocaleString();
-  }
+  };
 
   return (
     <div className="bg-white hover:scale-105 rounded-xl shadow-md hover:shadow-lg p-4 relative transition-transform duration-300">
@@ -57,7 +61,9 @@ const JobListing = ({ job }) => {
       {/* Salary */}
       <h4 className="mb-2 font-afacad">
         {job.annualSalaryMin
-          ? `${numberWithComma(job.annualSalaryMin)} - ${numberWithComma(job.annualSalaryMax)} ${job.salaryCurrency}`
+          ? `${numberWithComma(job.annualSalaryMin)} - ${numberWithComma(
+              job.annualSalaryMax
+            )} ${job.salaryCurrency}`
           : "Not disclosed"}{" "}
         / Year
       </h4>
