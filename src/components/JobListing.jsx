@@ -46,7 +46,7 @@ const JobListing = ({ job }) => {
         </h3>
 
         {/* Job Type */}
-        <div className="mx-auto my-2 bg-yl text-black rounded-full w-fit py-1 px-4">
+        <div className="mx-auto my-2 bg-yl text-black rounded-full w-24 py-1 px-4">
           {job.jobType && job.jobType.length > 0
             ? job.jobType[0]
             : "Not specified"}
