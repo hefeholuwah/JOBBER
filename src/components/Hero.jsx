@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className='w-full section bg-black flex py-20 mb-4'>
+    <section className='w-full section bg-black flex py-20 mb-4 position-fixed'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center'>
         <div className='text-center'>
-          <h2 className="font-semibold text-xl text-white my-4 sm:text-4xl md:text-5xl text-center">
+          <h2 className="font-semibold text-xl text-white my-4 sm:text-4xl md:text-4xl text-center">
             You've honed your skills, now
           </h2>
-          <h1 className="text-2xl text-bl font-extrabold text-white sm:text-5xl md:text-6xl">
+          <h1 className="text-3xl text-bl font-extrabold text-white sm:text-6xl md:text-6xl text-center">
             Find your Dream Job
           </h1>
           <br />
